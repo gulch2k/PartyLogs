@@ -120,12 +120,19 @@ const renderParties = async (parties) => {
       // delete party
       const deleteButton = partyElement.querySelector(".delete-button");
       deleteButton.addEventListener("click", async (event) => {
-        // your code here
+        const partyId = event.target.dataset.id;
+        try {
+          const deletedParty = await deleteParty(partyId);
+          console.log (`Party with ID ${deletedParty.id} has been deleted`);
+        }
       });
     });
   } catch (error) {
     console.error(error);
   }
+
+  const parties = await getAllParties();
+  renderParties(parties);
 };
 
 // init function
